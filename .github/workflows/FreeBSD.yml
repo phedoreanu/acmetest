@@ -37,7 +37,7 @@ jobs:
         protocol: http
         port: 8080
     - name: Set envs
-      run: echo "TestingDomain=${{steps.tunnel.outputs.server}}" >> $GITHUB_ENV
+      run: echo "TestingDomain=${{steps.tunnel.outputs.server}}" | sed 's/ http:\/\///' >> $GITHUB_ENV
     - uses: vmactions/freebsd-vm@v1
       with:
         envs: 'TestingDomain TEST_PREFERRED_CHAIN TEST_ACME_Server'
